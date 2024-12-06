@@ -1,111 +1,113 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 public class AddStudentForm : Form
 {
-    // Form controls
-    private TextBox txtStudentName, txtStudentAge, txtNationalID, txtStudentAddress, txtFatherName, txtCourses, txtGrade;
+    // Text fields to capture student data
+    private TextBox txtName, txtAge, txtNationalID, txtAddress, txtFatherName, txtCourses, txtClass;
+    // Buttons for saving or cancelling the operation
     private Button btnSave, btnCancel;
 
     public AddStudentForm()
     {
-        // Set form properties
+        // Form setup
         this.Text = "Add Student";
-        this.Size = new System.Drawing.Size(400, 500);
+        this.BackColor = System.Drawing.Color.Purple;
+        this.Width = 400;
+        this.Height = 400;
+        this.StartPosition = FormStartPosition.CenterScreen;
 
-        // Create and add labels and textboxes
-        AddLabel("Student Name:", 20, 20);
-        txtStudentName = AddTextBox(150, 20);
+        // Labels and input fields for student information
+        Label lblName = new Label { Text = "Student Name:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtName = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("Student Age:", 20, 60);
-        txtStudentAge = AddTextBox(150, 60);
+        Label lblAge = new Label { Text = "Age:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtAge = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("National ID:", 20, 100);
-        txtNationalID = AddTextBox(150, 100);
+        Label lblNationalId = new Label { Text = "National ID:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtNationalId = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("Student Address:", 20, 140);
-        txtStudentAddress = AddTextBox(150, 140);
+        Label lblAddress = new Label { Text = "Address:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtAddress = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("Father's Name:", 20, 180);
-        txtFatherName = AddTextBox(150, 180);
+        Label lblFatherName = new Label { Text = "Father's Name:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtFatherName = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("Courses:", 20, 220);
-        txtCourses = AddTextBox(150, 220);
+        Label lblCourses = new Label { Text = "Courses:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtCourses = new TextBox { Dock = DockStyle.Top };
 
-        AddLabel("Grade:", 20, 260);
-        txtGrade = AddTextBox(150, 260);
+        Label lblClass = new Label { Text = "Grade:", ForeColor = System.Drawing.Color.White, Dock = DockStyle.Top };
+        TextBox txtClass = new TextBox { Dock = DockStyle.Top };
 
-        // Add buttons
-        btnSave = new Button
+        // Create buttons
+        Button btnSave = new Button
         {
             Text = "Save",
-            Location = new System.Drawing.Point(100, 320),
-            Width = 80
+            Width = 100,
+            Height = 30,
+            BackColor = System.Drawing.Color.White,
+            Dock = DockStyle.Left
         };
-        btnSave.Click += BtnSave_Click;
-        this.Controls.Add(btnSave);
 
-        btnCancel = new Button
+        Button btnCancel = new Button
         {
             Text = "Cancel",
-            Location = new System.Drawing.Point(200, 320),
-            Width = 80
+            Width = 100,
+            Height = 30,
+            BackColor = System.Drawing.Color.White,
+            Dock = DockStyle.Right
         };
-        btnCancel.Click += BtnCancel_Click;
-        this.Controls.Add(btnCancel);
-    }
 
-    private void AddLabel(string text, int x, int y)
-    {
-        Label label = new Label
+        // Add events to buttons
+        btnSave.Click += (sender, e) =>
         {
-            Text = text,
-            Location = new System.Drawing.Point(x, y),
-            AutoSize = true
+            // Validation: Ensure all fields are filled in
+            if (string.IsNullOrWhiteSpace(txtName.Text) ||
+                string.IsNullOrWhiteSpace(txtAge.Text) ||
+                string.IsNullOrWhiteSpace(txtNationalId.Text) ||
+                string.IsNullOrWhiteSpace(txtAddress.Text) ||
+                string.IsNullOrWhiteSpace(txtFatherName.Text) ||
+                string.IsNullOrWhiteSpace(txtCourses.Text) ||
+                string.IsNullOrWhiteSpace(txtClass.Text))
+            {
+                MessageBox.Show("All fields must be filled in before saving!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Student data saved successfully!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
         };
-        this.Controls.Add(label);
-    }
+        
+        // Close the form without saving
+        btnCancel.Click += (sender, e) => this.Close();
 
-    private TextBox AddTextBox(int x, int y)
-    {
-        TextBox textBox = new TextBox
+        // Create a Panel to format the buttons
+        Panel buttonPanel = new Panel
         {
-            Location = new System.Drawing.Point(x, y),
-            Width = 200
+            Dock = DockStyle.Bottom,
+            Height = 30
         };
-        this.Controls.Add(textBox);
-        return textBox;
+
+        buttonPanel.Controls.Add(btnSave);
+        buttonPanel.Controls.Add(btnCancel);
+
+        // Add fields and buttons to the form
+        this.Controls.Add(lblClass);
+        this.Controls.Add(txtClass);
+        this.Controls.Add(lblCourses);
+        this.Controls.Add(txtCourses);
+        this.Controls.Add(lblFatherName);
+        this.Controls.Add(txtFatherName);
+        this.Controls.Add(lblAddress);
+        this.Controls.Add(txtAddress);
+        this.Controls.Add(lblNationalId);
+        this.Controls.Add(txtNationalId);
+        this.Controls.Add(lblAge);
+        this.Controls.Add(txtAge);
+        this.Controls.Add(lblName);
+        this.Controls.Add(txtName);
+        this.Controls.Add(buttonPanel);
     }
 
-    private void BtnSave_Click(object sender, EventArgs e)
-    {
-        // Example: Gather data and show it in a MessageBox
-        string studentData = $"Name: {txtStudentName.Text}\n" +
-                             $"Age: {txtStudentAge.Text}\n" +
-                             $"National ID: {txtNationalID.Text}\n" +
-                             $"Address: {txtStudentAddress.Text}\n" +
-                             $"Father's Name: {txtFatherName.Text}\n" +
-                             $"Courses: {txtCourses.Text}\n" +
-                             $"Grade: {txtGrade.Text}";
-
-        MessageBox.Show("Student data saved:\n" + studentData, "Saved");
-    }
-
-    private void BtnCancel_Click(object sender, EventArgs e)
-    {
-        // Close the form
-        this.Close();
-    }
-}
-public class Program
-{
-    [STAThread]
-    public static void Main()
-    {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
-
-        // Run the main form or AddStudentForm directly for testing
-        Application.Run(new AddStudentForm());
-    }
 }
