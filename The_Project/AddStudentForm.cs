@@ -1,5 +1,7 @@
 using System;
 using System.Windows.Forms;
+
+
 public class AddStudentForm : Form
 {
     // Text fields to capture student data
