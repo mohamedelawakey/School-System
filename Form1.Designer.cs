@@ -4,6 +4,8 @@
     {
         private System.ComponentModel.IContainer components = null;
 
+
+        
         // التعريفات الخاصة بالأدوات
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.Label lblAge;
