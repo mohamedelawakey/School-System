@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 public class LoginForm : Form
 {
+
     // Define variables for elements in the user interface
     private TextBox txtUsername;
     private TextBox txtPassword;
