@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 public class DeleteStudentForm : Form
 {
+
     //Define fields for data entry
     private TextBox txtNationalID,txtName;
     //Define the delete and cancel buttons
