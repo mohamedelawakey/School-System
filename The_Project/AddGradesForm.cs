@@ -5,6 +5,7 @@ using program;
 
 namespace program
 {
+    
     public class AddGradesForms : Form
     {
         private Button button1;
