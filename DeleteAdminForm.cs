@@ -5,6 +5,7 @@ using System.Windows.Forms;
 public class DeleteAdminForm : Form
 {
     // Define controls for the form
+    
     private TextBox txtNationalID,txtName;
     private Button btnDelete, btnCancel;
 
